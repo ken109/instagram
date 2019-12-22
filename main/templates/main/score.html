@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for account in accounts %}
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header" style="background-color: #ffffff">
+                            <div class="row">
+                                <img src="{{ account.img }}" alt="" style="height: 50px; border-radius: 30px"
+                                     class="mx-2">
+                                <div class="ml-2 d-flex align-items-center">{{ account.name }}</div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="container">
+                                    <h1 class="text-center">{{ account.score }}</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <a href="{{ account.url }}" class="btn btn-primary col-3 offset-2" target="_blank"
+                                   role="button">開く</a>
+                                <a href="{% url 'invisible' account.id %}" class="btn btn-outline-secondary offset-2 col-3"
+                                   role="button">削除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
