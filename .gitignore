@@ -1,3 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-main/migrations
-mam_spider/settings.py
+/main/migrations/*
+!/main/migrations/__init__.py
+/mam_spider/settings.py
