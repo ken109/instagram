@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 from .wait import Wait
 from .browser import Browser
@@ -8,7 +9,9 @@ class Crawler:
     BASE_URL = 'https://www.instagram.com/'
 
     def __init__(self):
-        self.driver = webdriver.Chrome('/usr/local/bin/chromedriver')
+        options = Options()
+        options.add_argument('--headless')
+        self.driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=options)
         self.driver.implicitly_wait(10)
         self.wait = Wait(self.driver)
         self.browser = Browser(self.driver)
