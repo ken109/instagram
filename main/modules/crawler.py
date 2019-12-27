@@ -5,6 +5,7 @@ from main.models import ScoreWord
 
 from .wait import Wait
 from .browser import Browser
+from .notify import ChatWork
 
 
 class Crawler:
@@ -15,6 +16,7 @@ class Crawler:
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
+        self.notify = ChatWork()
         self.driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=options)
         self.driver.set_window_size(1920, 1080)
         self.driver.implicitly_wait(10)
@@ -56,10 +58,10 @@ class Crawler:
             score += text.count(score_word.word) * score_word.score
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/div/article/div[1]/div/div/div[2]/div/div/div/div/ul/li[1]/div/div/div/div/div[1]/img')
-        print('before', score)
+        self.notify.send(text, score)
         if '一人以上' in img.get_attribute('alt'):
             score *= 2
-            print('multi', score)
+            self.notify.send(text, score)
         return score
 
     def quit(self):
