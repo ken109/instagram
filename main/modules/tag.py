@@ -3,7 +3,7 @@ from django.utils import timezone
 import time
 import re
 
-from main.models import SearchWord, ScoreWord
+from main.models import SearchWord
 
 from .crawler import Crawler
 
@@ -36,9 +36,7 @@ class TagSpider(Crawler):
         tags = re.compile(r'#(\w+)').findall(text)
         for tag in tags:
             SearchWord.objects.update_or_create(word=tag)
-        score = 0
-        for score_word in ScoreWord.objects.all():
-            score += text.count(score_word.word) * score_word.score
+        score = self.score(text)
         word_ob = SearchWord.objects.get(word=word)
         word_ob.score += score
         word_ob.save()

@@ -57,9 +57,7 @@ class MomSpider(Crawler):
         text = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span',
             data={'user_url': user_url, 'post': post}).text
-        score = 0
-        for score_word in ScoreWord.objects.all():
-            score += text.count(score_word.word) * score_word.score
+        score = self.score(text)
         user = Account.objects.get(url=user_url)
         user.score += score
         user.save()

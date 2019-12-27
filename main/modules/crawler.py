@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+from main.models import ScoreWord
+
 from .wait import Wait
 from .browser import Browser
 
@@ -47,6 +49,16 @@ class Crawler:
                 self.browser.scroll_to_element(element)
                 posts.append(element.get_attribute('href'))
         return posts
+
+    def score(self, text):
+        score = 0
+        for score_word in ScoreWord.objects.all():
+            score += text.count(score_word.word) * score_word.score
+        img = self.wait.find_element_by_xpath(
+            '//*[@id="react-root"]/section/main/div/div/article/div[1]/div/div/div[2]/div/div/div/div/ul/li[1]/div/div/div/div/div[1]/img')
+        if '一人以上' in img.get_attribute('alt'):
+            score *= 2
+        return score
 
     def quit(self):
         self.driver.close()
