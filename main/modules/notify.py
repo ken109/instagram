@@ -9,6 +9,7 @@ class ChatWork:
         self.headers = {'X-ChatWorkToken': ChatWork.APIKey}
 
     def send(self, *messages, image=None):
+        messages = [str(i) for i in messages]
         payload = {
             'body': messages[0]
         }

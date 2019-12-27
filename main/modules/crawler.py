@@ -56,12 +56,12 @@ class Crawler:
         score = 0
         for score_word in ScoreWord.objects.all():
             score += text.count(score_word.word) * score_word.score
-        img = self.wait.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/div/div/article/div[1]/div/div/div[2]/div/div/div/div/ul/li[1]/div/div/div/div/div[1]/img')
-        self.notify.send(text, str(score))
-        if '一人以上' in img.get_attribute('alt'):
-            score *= 2
-            self.notify.send(text, str(score))
+        # img = self.wait.find_element_by_xpath(
+        #     '//*[@id="react-root"]/section/main/div/div/article/div[1]/div/div/div[2]/div/div/div/div/ul/li[1]/div/div/div/div/div[1]/img')
+        self.notify.send(text, score)
+        # if '一人以上' in img.get_attribute('alt'):
+        #     score *= 2
+        #     self.notify.send(text, score)
         return score
 
     def quit(self):
