@@ -18,7 +18,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <a href="{% url 'delete_tag' tag.id %}" class="btn btn-outline-secondary offset-4 col-4"
+                                <a href="https://www.instagram.com/explore/tags/{{ tag.word }}" class="btn btn-primary offset-2 col-3" target="_blank"
+                                   role="button">開く</a>
+                                <a href="{% url 'delete_tag' tag.id %}" class="btn btn-outline-secondary offset-2 col-3"
                                    role="button">削除</a>
                             </div>
                         </div>
