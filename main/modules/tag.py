@@ -25,9 +25,8 @@ class TagSpider(Crawler):
                 word.save()
                 for post_from_word in self.posts_from_word('#' + word.word):
                     self.scoring(word.word, post_from_word)
-                word = SearchWord.objects.get(id=word.id)
-                if word.score == 0:
-                    word.delete()
+                zero_words = SearchWord.objects.filter(score=0, scored_at__isnull=False).all()
+                zero_words.delete()
 
     def scoring(self, word, post):
         self.driver.get(post)
