@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for tag in tags %}
+                <div class="col-md-3">
+                    <div class="card mb-4">
+                        <div class="card-header" style="background-color: #ffffff">
+                            <div class="row">
+                                <div class="ml-2 d-flex align-items-center">{{ tag.word }}</div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="container">
+                                    <h1 class="text-center">{{ tag.score }}</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <a href="{% url 'delete_tag' tag.id %}" class="btn btn-outline-secondary offset-4 col-4"
+                                   role="button">削除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

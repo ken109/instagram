@@ -20,6 +20,9 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('invisible/<int:id>', views.index, name='invisible')
+    path('', views.mam, name='index'),
+    path('mam', views.mam, name='mam'),
+    path('tag', views.tag, name='tag'),
+    path('invisible/<int:id>', views.invisible, name='invisible'),
+    path('delete-tag/<int:id>', views.delete_tag, name='delete_tag')
 ]
