@@ -21,7 +21,7 @@ class TagSpider(Crawler):
             if word is None:
                 time.sleep(5)
             else:
-                word.scored_at = timezone.datetime.now()
+                word.scored_at = timezone.now()
                 word.save()
                 for post_from_word in self.posts_from_word('#' + word.word):
                     self.scoring(word.word, post_from_word)
@@ -42,7 +42,3 @@ class TagSpider(Crawler):
         word_ob = SearchWord.objects.get(word=word)
         word_ob.score += score
         word_ob.save()
-
-    def quit(self):
-        self.driver.close()
-        self.driver.quit()

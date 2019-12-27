@@ -20,7 +20,7 @@ class MomSpider(Crawler):
             if word is None:
                 time.sleep(5)
             else:
-                word.searched_at = timezone.datetime.now()
+                word.searched_at = timezone.now()
                 word.save()
                 for post_from_word in self.posts_from_word('#' + word.word):
                     user_url, posts_from_user = self.user_posts_from_word_post(post_from_word)
@@ -63,7 +63,3 @@ class MomSpider(Crawler):
         user = Account.objects.get(url=user_url)
         user.score += score
         user.save()
-
-    def quit(self):
-        self.driver.close()
-        self.driver.quit()

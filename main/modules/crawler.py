@@ -47,3 +47,7 @@ class Crawler:
                 self.browser.scroll_to_element(element)
                 posts.append(element.get_attribute('href'))
         return posts
+
+    def quit(self):
+        self.driver.close()
+        self.driver.quit()
