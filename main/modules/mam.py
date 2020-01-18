@@ -41,7 +41,7 @@ class MomSpider(Crawler):
             exist = True
             for col in range(3):
                 element = self.driver.find_element_by_xpath(
-                    f'//*[@id="react-root"]/section/main/div/div[@class=" _2z6nI"]/article[2]/div[1]/div/div[{row + 1}]/div[{col + 1}]/a')
+                    f'//*[@id="react-root"]/section/main/div/div[@class=" _2z6nI"]/article/div[1]/div/div[{row + 1}]/div[{col + 1}]/a')
                 if element is not None:
                     self.browser.scroll_to_element(element)
                     posts.append(element.get_attribute('href'))

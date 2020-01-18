@@ -16,7 +16,7 @@ class Crawler:
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        options.add_argument("--proxy-server=socks5://127.0.0.1:9050")
+        # options.add_argument("--proxy-server=socks5://127.0.0.1:9050")
         self.notify = ChatWork()
         self.driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=options)
         self.driver.set_window_size(1920, 1080)
@@ -27,17 +27,17 @@ class Crawler:
     def login(self):
         self.driver.get(self.BASE_URL)
         self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/article/div[2]/div[2]/p/a',
-                                        wait_time=2).click()
+                                        wait_time=10).click()
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/div[2]/div/label/input',
-            wait_time=1).send_keys(
+            wait_time=10).send_keys(
             'ikegawa@spotakabiz.co.jp')
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/div[3]/div/label/input',
-            wait_time=1).send_keys(
+            wait_time=10).send_keys(
             'meimaki0419')
         self.wait.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/div[4]/button', wait_time=1).click()
+            '//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/div[4]/button', wait_time=10).click()
         # self.wait.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
 
     def posts_from_word(self, word):
