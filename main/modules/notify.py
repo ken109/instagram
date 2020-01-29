@@ -1,4 +1,7 @@
 import requests
+import smtplib
+import ssl
+from email.mime.text import MIMEText
 
 
 class ChatWork:
@@ -24,3 +27,17 @@ class ChatWork:
             params=payload,
             files=files
         )
+
+
+def mail(subject, body, to):
+    account = "kubok.dev@gmail.com"
+
+    server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context())
+    server.login(account, 'tjbqzygxxuuylrez')
+
+    for t in to:
+        msg = MIMEText(body, "html")
+        msg["Subject"] = subject
+        msg["To"] = t
+        msg["From"] = account
+        server.send_message(msg)
