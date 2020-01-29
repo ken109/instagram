@@ -3,7 +3,7 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 
-from mam_spider.settings import MAIL_TO
+from mam.settings import MAIL_TO
 
 
 class ChatWork:
