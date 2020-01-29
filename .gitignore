@@ -2,3 +2,4 @@
 /main/migrations/*
 !/main/migrations/__init__.py
 /mam_spider/settings.py
+/static
