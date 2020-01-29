@@ -16,7 +16,7 @@ def delete_tag(request, id):
 
 
 def mam(request):
-    accounts = Account.objects.filter(invisible=0).order_by('-score').all()[:100]
+    accounts = Account.objects.filter(invisible=0).order_by('-score').all()[:99]
     return render(request, 'main/score.html', {'accounts': accounts})
 
 
