@@ -33,7 +33,7 @@ class Wait:
         WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located)
 
     @until_success
-    def find_element_by_xpath(self, xpath, multiple=False, index=0, wait_time=DEFAULT_DELAY, data={}):
+    def find_element_by_xpath(self, xpath, multiple=False, index=0, wait_time=DEFAULT_DELAY):
         self.wait_all(wait_time)
         if multiple:
             return self.driver.find_elements_by_xpath(xpath)[index]

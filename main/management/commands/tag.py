@@ -7,14 +7,14 @@ from main.modules import tag
 
 
 class Command(BaseCommand):
-    help = 'crawl Instagram tags'
+    help = 'crawl Instagram tag'
 
     def handle(self, *args, **options):
         bot = tag.TagSpider()
         try:
             bot.start()
         except:
-            send_mail('停止', "tag\n" + traceback.format_exc(), 'papamama.insta@ctag-aws', ["kubok.dev@gmail.com"])
+            send_mail('停止 TAG', f"{bot.url}\n{traceback.format_exc()}", 'papamama.insta@ctag-aws', ["kubok.dev@gmail.com"])
             traceback.print_exc()
         finally:
             bot.quit()

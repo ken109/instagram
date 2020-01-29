@@ -12,6 +12,7 @@ class MomSpider(Crawler):
 
     def __init__(self):
         super().__init__()
+        self.url = ''
 
     def start(self):
         self.login()
@@ -28,6 +29,7 @@ class MomSpider(Crawler):
                         self.scoring(user_url, post_from_user)
 
     def user_posts_from_word_post(self, post):
+        self.url = post
         self.driver.get(post)
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/div/article/header/div[2]/div[1]/div[1]/h2/a').click()
@@ -53,10 +55,10 @@ class MomSpider(Crawler):
         return self.driver.current_url, posts
 
     def scoring(self, user_url, post):
+        self.url = post
         self.driver.get(post)
         text = self.wait.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span',
-            data={'user_url': user_url, 'post': post}).text
+            '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
         score = self.score(text)
         user = Account.objects.get(url=user_url)
         user.score += score
