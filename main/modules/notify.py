@@ -3,6 +3,8 @@ import smtplib
 import ssl
 from email.mime.text import MIMEText
 
+from mam_spider.settings import MAIL_TO
+
 
 class ChatWork:
     API_URL = 'https://api.chatwork.com/v2/rooms/158341952/messages?force=1'
@@ -29,15 +31,15 @@ class ChatWork:
         )
 
 
-def mail(subject, body, to):
+def mail(subject, body):
     account = "kubok.dev@gmail.com"
 
     server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context())
     server.login(account, 'tjbqzygxxuuylrez')
 
-    for t in to:
+    for to in MAIL_TO:
         msg = MIMEText(body, "html")
         msg["Subject"] = subject
-        msg["To"] = t
+        msg["To"] = to
         msg["From"] = account
         server.send_message(msg)
