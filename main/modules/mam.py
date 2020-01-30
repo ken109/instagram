@@ -7,7 +7,7 @@ from main.models import Account, SearchWord, ScoreWord
 from .crawler import Crawler
 
 
-class MomSpider(Crawler):
+class MamSpider(Crawler):
     BASE_URL = 'https://www.instagram.com/'
 
     def __init__(self):

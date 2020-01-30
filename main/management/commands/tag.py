@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 
 import traceback
 
-from main.modules import tag
+from main.modules.tag import TagSpider
 from main.modules.notify import mail
 
 
@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = 'crawl Instagram tag'
 
     def handle(self, *args, **options):
-        bot = tag.TagSpider()
+        bot = TagSpider()
         try:
             bot.start()
         except:
