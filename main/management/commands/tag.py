@@ -14,7 +14,7 @@ class Command(BaseCommand):
         try:
             bot.start()
         except:
-            mail('停止 TAG', f"{bot.url}\n{traceback.format_exc()}")
+            mail('GET TAG', f"{bot.url}\n{traceback.format_exc()}")
             traceback.print_exc()
         finally:
             bot.quit()
