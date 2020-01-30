@@ -7,7 +7,7 @@ from main.modules.notify import mail
 
 
 class Command(BaseCommand):
-    help = 'crawl Instagram tag'
+    help = 'crawlInstagram tag'
 
     def handle(self, *args, **options):
         bot = TagSpider()
