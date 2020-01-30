@@ -14,7 +14,7 @@ class Command(BaseCommand):
         try:
             bot.start()
         except:
-            mail('停止 MAM', f"{bot.url}\n{traceback.format_exc()}", ["kubok.dev@gmail.com"])
+            mail('停止 MAM', f"{bot.url}\n{traceback.format_exc()}")
             traceback.print_exc()
         finally:
             bot.quit()
