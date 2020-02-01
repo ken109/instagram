@@ -30,6 +30,7 @@ class TagSpider(Crawler):
 
     def scoring(self, word, post):
         self.url = post
+        print(self.url)
         self.driver.get(post)
         try:
             text = self.wait.find_element_by_xpath(
