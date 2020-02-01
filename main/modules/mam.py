@@ -12,7 +12,6 @@ class MamSpider(Crawler):
 
     def __init__(self):
         super().__init__()
-        self.url = ''
 
     def start(self):
         self.login()
@@ -23,7 +22,7 @@ class MamSpider(Crawler):
             else:
                 word.searched_at = timezone.now()
                 word.save()
-                for post_from_word in self.posts_from_word('#' + word.word):
+                for post_from_word in self.posts_from_word(MamSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
                     user_url, posts_from_user = self.user_posts_from_word_post(post_from_word)
                     for post_from_user in posts_from_user:
                         self.scoring(user_url, post_from_user)

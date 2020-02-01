@@ -24,6 +24,8 @@ class Crawler:
         self.driver.implicitly_wait(10)
         self.wait = Wait(self.driver)
         self.browser = Browser(self.driver)
+        self.tag = ''
+        self.url = ''
 
     def login(self):
         self.driver.get(self.BASE_URL)
@@ -42,9 +44,8 @@ class Crawler:
         # self.wait.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
 
     def posts_from_word(self, word):
-        self.wait.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input').send_keys(word)
-        self.wait.find_element_by_xpath(
-            '//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]').click()
+        self.tag = word
+        self.driver.get(word)
         posts = []
         for row in range(3):
             for col in range(3):
