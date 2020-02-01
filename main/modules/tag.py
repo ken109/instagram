@@ -4,7 +4,6 @@ import time
 import re
 
 from main.models import SearchWord
-from .notify import ChatWork
 
 from .crawler import Crawler
 
@@ -31,7 +30,6 @@ class TagSpider(Crawler):
 
     def scoring(self, word, post):
         self.url = post
-        ChatWork().send(self.url, self.tag)
         self.driver.get(post)
         try:
             text = self.wait.find_element_by_xpath(
