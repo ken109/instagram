@@ -49,10 +49,14 @@ class Crawler:
         posts = []
         for row in range(3):
             for col in range(3):
-                element = self.driver.find_element_by_xpath(
-                    f'//*[@id="react-root"]/section/main/article/div[1]/div/div/div[{row + 1}]/div[{col + 1}]/a')
-                self.browser.scroll_to_element(element)
-                posts.append(element.get_attribute('href'))
+                try:
+                    element = self.driver.find_element_by_xpath(
+                        f'//*[@id="react-root"]/section/main/article/div[1]/div/div/div[{row + 1}]/div[{col + 1}]/a')
+                    self.browser.scroll_to_element(element)
+                    posts.append(element.get_attribute('href'))
+                except NoSuchElementException:
+                    break
+
         return posts
 
     def score(self, text):

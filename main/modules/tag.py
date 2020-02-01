@@ -31,13 +31,16 @@ class TagSpider(Crawler):
     def scoring(self, word, post):
         self.url = post
         self.driver.get(post)
-        text = self.wait.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-        tags = re.compile(r'#(\w+)').findall(text)
-        for tag in tags:
-            if re.match(r'^[^a-zA-Z]*$', tag):
-                SearchWord.objects.update_or_create(word=tag)
-        score = self.score(text)
-        word_ob = SearchWord.objects.get(word=word)
-        word_ob.score += score
-        word_ob.save()
+        try:
+            text = self.wait.find_element_by_xpath(
+                '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+            tags = re.compile(r'#(\w+)').findall(text)
+            for tag in tags:
+                if re.match(r'^[^a-zA-Z]*$', tag):
+                    SearchWord.objects.update_or_create(word=tag)
+            score = self.score(text)
+            word_ob = SearchWord.objects.get(word=word)
+            word_ob.score += score
+            word_ob.save()
+        except AttributeError:
+            pass

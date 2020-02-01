@@ -2,7 +2,7 @@ from django.utils import timezone
 
 import time
 
-from main.models import Account, SearchWord, ScoreWord
+from main.models import Account, SearchWord
 
 from .crawler import Crawler
 
@@ -56,9 +56,12 @@ class MamSpider(Crawler):
     def scoring(self, user_url, post):
         self.url = post
         self.driver.get(post)
-        text = self.wait.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-        score = self.score(text)
-        user = Account.objects.get(url=user_url)
-        user.score += score
-        user.save()
+        try:
+            text = self.wait.find_element_by_xpath(
+                '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+            score = self.score(text)
+            user = Account.objects.get(url=user_url)
+            user.score += score
+            user.save()
+        except AttributeError:
+            pass
