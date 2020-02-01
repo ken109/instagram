@@ -16,7 +16,7 @@ class Command(BaseCommand):
             bot.start()
         except:
             mail('GET TAG', f"tag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}")
-            chat.send(f"GET TAG\n\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}")
+            chat.send(f"GET TAG\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}")
             traceback.print_exc()
         finally:
             bot.quit()
