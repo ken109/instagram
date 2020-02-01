@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
 
 from main.models import ScoreWord
 
@@ -57,10 +58,13 @@ class Crawler:
         score = 0
         for score_word in ScoreWord.objects.all():
             score += text.count(score_word.word) * score_word.score
-        img = self.driver.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/div/div/article/div[1]/div/div').find_element_by_tag_name('img')
-        if 'one or more people' in img.get_attribute('alt'):
-            score *= 2
+        try:
+            img = self.driver.find_element_by_xpath(
+                '//*[@id="react-root"]/section/main/div/div/article/div[1]/div/div').find_element_by_tag_name('img')
+            if 'one or more people' in img.get_attribute('alt'):
+                score *= 2
+        except NoSuchElementException:
+            pass
         return score
 
     def quit(self):

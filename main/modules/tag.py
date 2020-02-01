@@ -36,7 +36,8 @@ class TagSpider(Crawler):
             '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
         tags = re.compile(r'#(\w+)').findall(text)
         for tag in tags:
-            SearchWord.objects.update_or_create(word=tag)
+            if re.match(r'^[^a-zA-Z]*$', tag):
+                SearchWord.objects.update_or_create(word=tag)
         score = self.score(text)
         word_ob = SearchWord.objects.get(word=word)
         word_ob.score += score

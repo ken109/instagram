@@ -38,7 +38,7 @@ def mail(subject, body):
     server.login(account, 'tjbqzygxxuuylrez')
 
     for to in MAIL_TO:
-        msg = MIMEText(body, "html")
+        msg = MIMEText(body, "plain")
         msg["Subject"] = subject
         msg["To"] = to
         msg["From"] = account
