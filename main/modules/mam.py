@@ -16,10 +16,8 @@ class MamSpider(Crawler):
     def start(self):
         self.login()
         while True:
-            word = SearchWord.objects.filter(searched_at__isnull=True, scored_at__isnull=False).order_by('-score').first()
-            if word is None:
-                time.sleep(5)
-            else:
+            for i in range(100):
+                word = SearchWord.objects.order_by('-score').all()[i]
                 word.searched_at = timezone.now()
                 word.save()
                 for post_from_word in self.posts_from_word(MamSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
