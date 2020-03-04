@@ -20,6 +20,7 @@ class MamSpider(Crawler):
             for word in words:
                 word.searched_at = timezone.now()
                 word.save()
+
                 for post_from_word in self.posts_from_word(MamSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
                     user_url, posts_from_user = self.user_posts_from_word_post(post_from_word)
                     for post_from_user in posts_from_user:
@@ -29,7 +30,7 @@ class MamSpider(Crawler):
         self.url = post
         self.driver.get(post)
         self.wait.find_element_by_xpath(
-            '//*[@id="react-root"]/section/main/div/div/article/header/div[2]/div[1]/div[1]/h2/a').click()
+            '//*[@id="react-root"]/section/main/div/div/article/header/div[2]/div[1]/div[1]/a').click()
         name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/h1').text
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
