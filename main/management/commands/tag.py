@@ -15,7 +15,8 @@ class Command(BaseCommand):
         try:
             bot.start()
         except:
-            chat.send(f"GET TAG\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}")
+            bot.driver.save_screenshot('tag_error.png')
+            chat.send(f"GET TAG\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}", image='tag_error.png')
             traceback.print_exc()
         finally:
             bot.quit()
