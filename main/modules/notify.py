@@ -22,7 +22,7 @@ class ChatWork:
     def send(*messages, image):
         messages = [str(i) for i in messages]
         files = {
-            'file': ('mam_error.png', open(image, 'rb'), 'image/png'),
+            'file': (image, open(image, 'rb'), 'image/png'),
             'message': messages[0] if len(messages) > 0 else ''
         }
         if len(messages) > 1:
