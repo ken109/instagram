@@ -3,3 +3,4 @@
 !/main/migrations/__init__.py
 /mam/settings.py
 /static
+/chrome-data

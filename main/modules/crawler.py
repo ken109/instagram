@@ -17,12 +17,9 @@ class Crawler:
     def __init__(self):
         options = Options()
         options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        # options.add_argument("--proxy-server=socks5://127.0.0.1:9050")
+        options.add_argument("--user-data-dir=chrome-data")
         self.notify = ChatWork()
         self.driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=options)
-        self.driver.set_window_size(1920, 1080)
         self.driver.implicitly_wait(10)
         self.wait = Wait(self.driver)
         self.browser = Browser(self.driver)
@@ -41,13 +38,13 @@ class Crawler:
             'Kubo109Ken')
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button', wait_time=10).click()
+        time.sleep(10)
         # self.wait.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
 
     def posts_from_word(self, word):
         self.tag = word
         self.driver.get(word)
         time.sleep(5)
-        ChatWork.send_screen(self.driver)
         posts = []
         for row in range(3):
             for col in range(3):
