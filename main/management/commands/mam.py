@@ -12,12 +12,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         bot = MamSpider()
-        chat = ChatWork()
         try:
             bot.start()
         except:
             bot.driver.save_screenshot('mam_error.png')
-            chat.send(f"GET MAM\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}", image='mam_error.png')
+            ChatWork.send(f"GET MAM\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}", image='mam_error.png')
             os.remove('mam_error.png')
             traceback.print_exc()
         finally:

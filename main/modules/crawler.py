@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 
+import time
+
 from main.models import ScoreWord
 
 from .wait import Wait
@@ -44,6 +46,8 @@ class Crawler:
     def posts_from_word(self, word):
         self.tag = word
         self.driver.get(word)
+        time.sleep(5)
+        ChatWork.send_screen(self.driver)
         posts = []
         for row in range(3):
             for col in range(3):

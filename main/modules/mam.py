@@ -3,6 +3,7 @@ from django.utils import timezone
 from main.models import Account, SearchWord
 
 from .crawler import Crawler
+from .notify import ChatWork
 
 
 class MamSpider(Crawler):
@@ -32,6 +33,7 @@ class MamSpider(Crawler):
         name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/h1').text
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
+        ChatWork.send_screen(self.driver)
         if not Account.objects.filter(url=self.driver.current_url):
             Account.objects.create(url=self.driver.current_url, name=name, img=img)
         posts = []
