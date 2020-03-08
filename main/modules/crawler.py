@@ -29,8 +29,6 @@ class Crawler:
 
     def login(self):
         self.driver.get(self.BASE_URL)
-        self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/article/div[2]/div[2]/p/a',
-                                        wait_time=10).click()
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/article/div/div[1]/div/form/div[2]/div/label/input',
             wait_time=10).send_keys(
