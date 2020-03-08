@@ -1,7 +1,5 @@
 from django.utils import timezone
 
-import time
-
 from main.models import Account, SearchWord
 
 from .crawler import Crawler
