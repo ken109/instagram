@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render, redirect
 
 from .models import Account, SearchWord
@@ -22,4 +24,6 @@ def mam(request):
 
 def tag(request):
     tags = SearchWord.objects.order_by('-score').all()[:100]
-    return render(request, 'main/tags.html', {'tags': tags})
+    today_accounts = Account.objects.filter(created_at__gte=datetime.now().date())
+    today_tags = SearchWord.objects.filter(created_at__gte=datetime.now().date())
+    return render(request, 'main/tags.html', {'tags': tags, 'today_accounts': len(today_accounts), 'today_tags': len(today_tags)})

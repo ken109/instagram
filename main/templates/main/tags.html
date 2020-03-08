@@ -1,6 +1,7 @@
 {% extends 'main/base.html' %}
 {% block content %}
     <div class="container">
+        今日追加されたアカウント：{{ today_accounts }}　　今日追加されたタグ：{{ today_tags }}
         <div class="row">
             {% for tag in tags %}
                 <div class="col-md-3">
