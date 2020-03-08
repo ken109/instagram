@@ -19,7 +19,7 @@ class ChatWork:
         os.remove('screen.png')
 
     @staticmethod
-    def send(*messages, image):
+    def send(image, *messages):
         messages = [str(i) for i in messages]
         files = {
             'file': (image, open(image, 'rb'), 'image/png'),
