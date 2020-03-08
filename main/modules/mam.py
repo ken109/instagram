@@ -3,6 +3,7 @@ from django.utils import timezone
 from main.models import Account, SearchWord
 
 from .crawler import Crawler
+from .notify import ChatWork
 
 
 class MamSpider(Crawler):
@@ -13,6 +14,7 @@ class MamSpider(Crawler):
 
     def start(self):
         self.login()
+        ChatWork.send_screen(self.driver)
         while True:
             words = SearchWord.objects.order_by('-score').all()[:100]
             for word in words:
