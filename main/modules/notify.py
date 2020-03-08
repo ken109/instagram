@@ -23,10 +23,11 @@ class ChatWork:
         messages = [str(i) for i in messages]
         files = {
             'file': ('mam_error.png', open(image, 'rb'), 'image/png'),
-            'message': messages[0]
+            'message': messages[0] if len(messages) > 0 else ''
         }
-        for message in messages[1:]:
-            files['message'] += '\n' + message
+        if len(messages) > 1:
+            for message in messages[1:]:
+                files['message'] += '\n' + message
         requests.post(
             ChatWork.API_URL,
             headers=ChatWork.headers,
