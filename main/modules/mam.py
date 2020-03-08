@@ -13,8 +13,7 @@ class MamSpider(Crawler):
         super().__init__()
 
     def start(self):
-        self.login()
-        ChatWork.send_screen(self.driver)
+        # self.login()
         while True:
             words = SearchWord.objects.order_by('-score').all()[:100]
             for word in words:
