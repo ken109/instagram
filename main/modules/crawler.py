@@ -32,11 +32,11 @@ class Crawler:
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[2]/div/label/input',
             wait_time=10).send_keys(
-            'ikegawa@spotakabiz.co.jp')
+            'kubok.dev+instagram@gmail.com')
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[3]/div/label/input',
             wait_time=10).send_keys(
-            'meimaki0419')
+            'Kubo109Ken')
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button', wait_time=10).click()
         # self.wait.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
