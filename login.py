@@ -26,5 +26,3 @@ driver.find_element_by_xpath(
     '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button').click()
 time.sleep(10)
 ChatWork.send_screen(driver)
-
-driver.so
