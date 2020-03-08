@@ -8,7 +8,6 @@ from main.models import ScoreWord
 
 from .wait import Wait
 from .browser import Browser
-from .notify import ChatWork
 
 
 class Crawler:
@@ -18,7 +17,6 @@ class Crawler:
         options = Options()
         options.add_argument('--headless')
         options.add_argument("--user-data-dir=chrome-data")
-        self.notify = ChatWork()
         self.driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=options)
         self.driver.implicitly_wait(10)
         self.wait = Wait(self.driver)
