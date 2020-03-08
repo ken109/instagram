@@ -16,6 +16,8 @@ class Crawler:
     def __init__(self):
         options = Options()
         options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--user-data-dir=chrome-data")
         self.driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=options)
         self.driver.implicitly_wait(10)
