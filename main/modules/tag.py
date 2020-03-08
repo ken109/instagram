@@ -33,7 +33,7 @@ class TagSpider(Crawler):
         self.driver.get(post)
         try:
             text = self.wait.find_element_by_xpath(
-                '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+                '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/*[2]').text
             tags = re.compile(r'#(\w+)').findall(text)
             for tag in tags:
                 if re.match(r'^[^a-zA-Z]*$', tag):

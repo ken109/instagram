@@ -5,7 +5,7 @@ import random
 import time
 import traceback
 
-DEFAULT_DELAY = 50
+DEFAULT_DELAY = 30
 
 
 def until_success(func):
