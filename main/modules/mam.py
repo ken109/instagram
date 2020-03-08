@@ -3,7 +3,6 @@ from django.utils import timezone
 from main.models import Account, SearchWord
 
 from .crawler import Crawler
-from .notify import ChatWork
 
 
 class MamSpider(Crawler):
