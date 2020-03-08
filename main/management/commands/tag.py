@@ -16,7 +16,7 @@ class Command(BaseCommand):
             bot.start()
         except:
             bot.driver.save_screenshot('tag_error.png')
-            ChatWork.send(f"GET TAG\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}", image='tag_error.png')
+            ChatWork.send_file('tag_error.png', f"GET TAG\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}")
             os.remove('tag_error.png')
             traceback.print_exc()
         finally:
