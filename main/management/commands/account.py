@@ -5,7 +5,7 @@ import os
 
 from instagram.settings import TITLE
 
-from main.modules.mam import MamSpider
+from main.modules.account import MamSpider
 from main.modules.notify import ChatWork
 
 

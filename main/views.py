@@ -39,8 +39,9 @@ def account(request):
 
 
 def tag(request):
-    tags = SearchWord.objects.order_by('-score').all()[:100]
-    sort = sorted(tags, reverse=True)
+    tags = SearchWord.objects.order_by('-score').all()[:40]
+    sort = sorted(tags, key=lambda word: word.searched_at if word.searched_at is not None else datetime(2000, 1, 1),
+                  reverse=True)
     now = sort[0] if len(sort) else 0
     today_accounts = Account.objects.filter(created_at__gte=datetime.now().date())
     today_tags = SearchWord.objects.filter(created_at__gte=datetime.now().date())

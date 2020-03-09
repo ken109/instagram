@@ -20,14 +20,10 @@ class SearchWord(models.Model):
     word = models.CharField(max_length=63, unique=True)
     score = models.IntegerField(default=0)
     scored_at = models.DateTimeField(null=True)
+    search_count = models.IntegerField(default=0)
     searched_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-    def __lt__(self, other):
-        if self.searched_at is None or other.searched_at is None:
-            return False
-        return self.searched_at < other.searched_at
 
     def __str__(self):
         return self.word
