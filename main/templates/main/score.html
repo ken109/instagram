@@ -25,6 +25,9 @@
                                 <a href="{% url 'invisible' account.id %}" class="btn btn-outline-secondary offset-2 col-3"
                                    role="button">削除</a>
                             </div>
+                            <div class="row mt-2 pr-3" style="justify-content: flex-end;">
+                                <small class="text-muted">追加日：{{ account.created_at }}</small>
+                            </div>
                         </div>
                     </div>
                 </div>
