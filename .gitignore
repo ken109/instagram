@@ -1,6 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 /main/migrations/*
 !/main/migrations/__init__.py
-/mam/settings.py
+/instagram/settings.py
 /static
 /chrome-data

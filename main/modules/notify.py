@@ -4,7 +4,7 @@ import ssl
 import os
 from email.mime.text import MIMEText
 
-from mam.settings import MAIL_TO
+from instagram.settings import MAIL_TO
 
 
 class ChatWork:

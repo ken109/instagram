@@ -1,5 +1,5 @@
 """
-WSGI config for mam project.
+WSGI config for instagram project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -15,6 +15,6 @@ from django.core.wsgi import get_wsgi_application
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mam.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'instagram.settings')
 
 application = get_wsgi_application()

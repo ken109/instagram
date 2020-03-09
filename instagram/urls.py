@@ -1,4 +1,4 @@
-"""mam URL Configuration
+"""instagram URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -20,8 +20,8 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.mam, name='index'),
-    path('mam', views.mam, name='mam'),
+    path('', views.account, name='index'),
+    path('account', views.account, name='account'),
     path('tag', views.tag, name='tag'),
     path('invisible/<int:id>', views.invisible, name='invisible'),
     path('delete-tag/<int:id>', views.delete_tag, name='delete_tag'),

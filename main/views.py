@@ -2,6 +2,8 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect
 
+from instagram.settings import TITLE
+
 from .models import Account, SearchWord
 from .forms import TagsForm
 
@@ -28,12 +30,12 @@ def add_tag(request):
             }
         )
         return redirect('tag')
-    return render(request, 'main/add_tag.html', {'form': form})
+    return render(request, 'main/edit_tag.html', {'title': TITLE, 'form': form})
 
 
-def mam(request):
+def account(request):
     accounts = Account.objects.filter(invisible=0).order_by('-score').all()[:99]
-    return render(request, 'main/score.html', {'accounts': accounts})
+    return render(request, 'main/score.html', {'title': TITLE, 'accounts': accounts})
 
 
 def tag(request):
@@ -42,4 +44,5 @@ def tag(request):
     today_accounts = Account.objects.filter(created_at__gte=datetime.now().date())
     today_tags = SearchWord.objects.filter(created_at__gte=datetime.now().date())
     return render(request, 'main/tags.html',
-                  {'tags': tags, 'now': now, 'today_accounts': len(today_accounts), 'today_tags': len(today_tags)})
+                  {'title': TITLE, 'tags': tags, 'now': now, 'today_accounts': len(today_accounts),
+                   'today_tags': len(today_tags)})
