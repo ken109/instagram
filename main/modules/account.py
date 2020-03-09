@@ -17,8 +17,8 @@ class MamSpider(Crawler):
             words = SearchWord.objects.order_by('-score').all()[:40]
             if len(words):
                 min_count = sorted(words, key=lambda tag: tag.search_count)[0].search_count
-                for word in sorted(words, key=lambda tag: tag.score, reverse=True):
-                    if word.score == min_count:
+                for word in words:
+                    if word.search_count == min_count:
                         word.searched_at = timezone.now()
                         word.search_count += 1
                         word.save()
