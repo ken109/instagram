@@ -3,6 +3,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 
 from .models import Account, SearchWord
+from .forms import TagsForm
 
 
 def invisible(request, id):
@@ -17,6 +18,19 @@ def delete_tag(request, id):
     return redirect('tag')
 
 
+def add_tag(request):
+    form = TagsForm(request.POST or None)
+    if form.is_valid():
+        SearchWord.objects.update_or_create(
+            word=form.cleaned_data['word'],
+            defaults={
+                'score': form.cleaned_data['score'],
+            }
+        )
+        return redirect('tag')
+    return render(request, 'main/add_tag.html', {'form': form})
+
+
 def mam(request):
     accounts = Account.objects.filter(invisible=0).order_by('-score').all()[:99]
     return render(request, 'main/score.html', {'accounts': accounts})
@@ -27,4 +41,5 @@ def tag(request):
     now = sorted(tags, reverse=True)[0]
     today_accounts = Account.objects.filter(created_at__gte=datetime.now().date())
     today_tags = SearchWord.objects.filter(created_at__gte=datetime.now().date())
-    return render(request, 'main/tags.html', {'tags': tags, 'now': now, 'today_accounts': len(today_accounts), 'today_tags': len(today_tags)})
+    return render(request, 'main/tags.html',
+                  {'tags': tags, 'now': now, 'today_accounts': len(today_accounts), 'today_tags': len(today_tags)})

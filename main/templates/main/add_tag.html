@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header" style="background-color: #ffffff">
+                        追加・更新
+                    </div>
+                    <div class="card-body">
+                        <form id="add-tag-form" method="POST" action="{% url 'add_tag' %}">
+                            {% csrf_token %}
+
+                            <div class="form-group row">
+                                <label for="easy_id" class="col-md-4 col-form-label text-md-right">タグ</label>
+                                <div class="col-md-6">
+                                    {{ form.word|add_class:'form-control' }}
+                                    {% for error in form.word.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="easy_password" class="col-md-4 col-form-label text-md-right">スコア</label>
+                                <div class="col-md-6">
+                                    {{ form.score|add_class:'form-control' }}
+                                    {% for error in form.score.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        登録
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

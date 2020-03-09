@@ -24,5 +24,6 @@ urlpatterns = [
     path('mam', views.mam, name='mam'),
     path('tag', views.tag, name='tag'),
     path('invisible/<int:id>', views.invisible, name='invisible'),
-    path('delete-tag/<int:id>', views.delete_tag, name='delete_tag')
+    path('delete-tag/<int:id>', views.delete_tag, name='delete_tag'),
+    path('add-tag', views.add_tag, name='add_tag')
 ]

@@ -1,8 +1,16 @@
 {% extends 'main/base.html' %}
 {% block content %}
     <div class="container">
-        <div class="row pl-3">
-            今日追加されたアカウント：{{ today_accounts }}　　今日追加されたタグ：{{ today_tags }}
+        <div class="row">
+            <div class="col-6">
+                <p style="display: inline">今日追加されたアカウント：{{ today_accounts }}</p>
+                <p class="pl-3" style="display: inline">今日追加されたタグ：{{ today_tags }}</p>
+            </div>
+            <div class="col-6 text-right">
+                <a href="{% url 'add_tag' %}" class="btn btn-primary" role="button">
+                    追加・更新
+                </a>
+            </div>
         </div>
         <div class="row mt-3">
             {% for tag in tags %}
