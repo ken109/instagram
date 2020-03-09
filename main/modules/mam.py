@@ -29,7 +29,7 @@ class MamSpider(Crawler):
         self.driver.get(post)
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/div/article/header/div[2]/div[1]/div[1]/a').click()
-        name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/h1').text
+        name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/*[1]').text
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
         if not Account.objects.filter(url=self.driver.current_url):
