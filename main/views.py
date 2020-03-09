@@ -40,7 +40,8 @@ def account(request):
 
 def tag(request):
     tags = SearchWord.objects.order_by('-score').all()[:100]
-    now = sorted(tags, reverse=True)[0]
+    sort = sorted(tags, reverse=True)
+    now = sort[0] if len(sort) else 0
     today_accounts = Account.objects.filter(created_at__gte=datetime.now().date())
     today_tags = SearchWord.objects.filter(created_at__gte=datetime.now().date())
     return render(request, 'main/tags.html',
