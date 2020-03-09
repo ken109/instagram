@@ -16,7 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from instagram.settings import TITLE
+
 from main import views
+
+admin.site.site_title = TITLE
+admin.site.site_header = TITLE
+admin.site.index_title = 'データベース'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

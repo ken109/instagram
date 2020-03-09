@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 
 
@@ -38,3 +39,7 @@ class ScoreWord(models.Model):
 
     def __str__(self):
         return self.word
+
+
+class ScoreWordAdmin(admin.ModelAdmin):
+    list_display = ['word', 'score']
