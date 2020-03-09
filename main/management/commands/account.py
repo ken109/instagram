@@ -10,7 +10,7 @@ from main.modules.notify import ChatWork
 
 
 class Command(BaseCommand):
-    help = 'crawl Instagram instagram'
+    help = 'crawl Instagram account'
 
     def handle(self, *args, **options):
         bot = MamSpider()
