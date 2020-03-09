@@ -36,9 +36,14 @@
                                    role="button">削除</a>
                             </div>
                             <div class="row mt-2 pr-3" style="justify-content: flex-end;">
-                                <small class="text-muted">最終検索：{% ifequal tag.id now.id %}検索中...{% else %}
+                                <small class="text-muted">最終検索：{% ifequal tag.id searching.id %}アカウント検索中...{% else %}
                                     {{ tag.searched_at | default_if_none:'未検索' }}{% endifequal %}</small>
                             </div>
+                            {% ifequal tag.id scoring.id %}
+                                <div class="row mt-2 pr-3" style="justify-content: flex-end;">
+                                    <small class="text-muted">スコアリング中...</small>
+                                </div>
+                            {% endifequal %}
                         </div>
                     </div>
                 </div>

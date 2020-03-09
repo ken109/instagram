@@ -9,6 +9,7 @@ class Account(models.Model):
     img = models.CharField(max_length=255)
     followed = models.BooleanField(default=False)
     invisible = models.BooleanField(default=0)
+    scored_at = models.DateTimeField()
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -19,8 +20,8 @@ class Account(models.Model):
 class SearchWord(models.Model):
     word = models.CharField(max_length=63, unique=True)
     score = models.IntegerField(default=0)
-    scored_at = models.DateTimeField(null=True)
     search_count = models.IntegerField(default=0)
+    scored_at = models.DateTimeField(null=True)
     searched_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)

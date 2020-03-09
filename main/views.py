@@ -35,16 +35,16 @@ def add_tag(request):
 
 def account(request):
     accounts = Account.objects.filter(invisible=0).order_by('-score').all()[:99]
-    return render(request, 'main/score.html', {'title': TITLE, 'accounts': accounts})
+    scoring = Account.objects.order_by('-scored_at').first()
+    return render(request, 'main/accounts.html', {'title': TITLE, 'accounts': accounts, 'scoring': scoring})
 
 
 def tag(request):
     tags = SearchWord.objects.order_by('-score').all()[:40]
-    sort = sorted(tags, key=lambda word: word.searched_at if word.searched_at is not None else datetime(2000, 1, 1),
-                  reverse=True)
-    now = sort[0] if len(sort) else 0
+    searching = SearchWord.objects.order_by('-searched_at').first()
+    scoring = SearchWord.objects.order_by('-scored_at').first()
     today_accounts = Account.objects.filter(created_at__gte=datetime.now().date())
     today_tags = SearchWord.objects.filter(created_at__gte=datetime.now().date())
     return render(request, 'main/tags.html',
-                  {'title': TITLE, 'tags': tags, 'now': now, 'today_accounts': len(today_accounts),
+                  {'title': TITLE, 'tags': tags, 'searching': searching, 'scoring': scoring,  'today_accounts': len(today_accounts),
                    'today_tags': len(today_tags)})

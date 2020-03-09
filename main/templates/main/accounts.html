@@ -28,6 +28,11 @@
                             <div class="row mt-2 pr-3" style="justify-content: flex-end;">
                                 <small class="text-muted">追加日：{{ account.created_at }}</small>
                             </div>
+                            {% ifequal account.id scoring.id %}
+                                <div class="row mt-2 pr-3" style="justify-content: flex-end;">
+                                    <small class="text-muted">スコアリング中...</small>
+                                </div>
+                            {% endifequal %}
                         </div>
                     </div>
                 </div>

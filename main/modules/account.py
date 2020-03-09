@@ -37,8 +37,11 @@ class MamSpider(Crawler):
         name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/*[1]').text
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
-        if not Account.objects.filter(url=self.driver.current_url):
-            Account.objects.create(url=self.driver.current_url, name=name, img=img)
+        Account.objects.update_or_create(url=self.driver.current_url, defaults={
+            'name': name,
+            'img': img,
+            'scored_at': timezone.now()
+        })
         posts = []
         for row in range(3):
             exist = True
