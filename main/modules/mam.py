@@ -1,5 +1,7 @@
 from django.utils import timezone
 
+import time
+
 from main.models import Account, SearchWord
 
 from .crawler import Crawler
@@ -15,6 +17,8 @@ class MamSpider(Crawler):
         # self.login()
         while True:
             words = SearchWord.objects.order_by('-score').all()[:100]
+            if not len(words):
+                time.sleep(5)
             for word in words:
                 word.searched_at = timezone.now()
                 word.save()
