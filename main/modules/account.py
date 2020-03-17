@@ -14,7 +14,7 @@ class MamSpider(Crawler):
     def start(self):
         # self.login()
         while True:
-            words = SearchWord.objects.order_by('-score').all()[:40]
+            words = SearchWord.objects.order_by('-score').all()[:100]
             if len(words):
                 min_count = sorted(words, key=lambda tag: tag.search_count)[0].search_count
                 for word in words:

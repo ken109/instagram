@@ -40,7 +40,7 @@ def account(request):
 
 
 def tag(request):
-    tags = SearchWord.objects.order_by('-score').all()[:40]
+    tags = SearchWord.objects.order_by('-score').all()[:100]
     searching = SearchWord.objects.order_by('-searched_at').first()
     scoring = SearchWord.objects.order_by('-scored_at').first()
     today_accounts = Account.objects.filter(created_at__gte=datetime.now().date())
