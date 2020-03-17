@@ -41,7 +41,7 @@ class Crawler:
         time.sleep(10)
         # self.wait.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
 
-    def posts_from_word(self, word):
+    def posts_from_word(self, is_tag, word):
         self.tag = word
         self.driver.get(word)
         time.sleep(5)
@@ -49,8 +49,12 @@ class Crawler:
         for row in range(3):
             for col in range(3):
                 try:
-                    element = self.driver.find_element_by_xpath(
-                        f'//*[@id="react-root"]/section/main/article/div[1]/div/div/div[{row + 1}]/div[{col + 1}]/a')
+                    if is_tag:
+                        element = self.driver.find_element_by_xpath(
+                            f'//*[@id="react-root"]/section/main/article/div[1]/div/div/div[{row + 1}]/div[{col + 1}]/a')
+                    else:
+                        element = self.driver.find_element_by_xpath(
+                            f'//*[@id="react-root"]/section/main/article/div[2]/div/div[{row + 1}]/div[{col + 1}]/a')
                     self.browser.scroll_to_element(element)
                     posts.append(element.get_attribute('href'))
                 except NoSuchElementException:

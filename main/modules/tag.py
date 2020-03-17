@@ -23,7 +23,8 @@ class TagSpider(Crawler):
             else:
                 word.scored_at = timezone.now()
                 word.save()
-                for post_from_word in self.posts_from_word(TagSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
+                for post_from_word in self.posts_from_word(True,
+                                                           TagSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
                     self.scoring(word.word, post_from_word)
                 zero_words = SearchWord.objects.filter(score=0, scored_at__isnull=False).all()
                 zero_words.delete()
