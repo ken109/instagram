@@ -7,21 +7,9 @@
                     <div class="card mb-4">
                         <div class="card-header" style="background-color: #ffffff">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="row">
-                                        <img src="{{ account.img }}" alt="" style="height: 50px; border-radius: 30px"
-                                             class="mx-2">
-                                        <div class="ml-2 d-flex align-items-center">{{ account.name }}</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 d-flex flex-column text-right">
-                                    <div class="">
-                                        <small class="text-muted">フォロワー：{{ account.follower }}</small>
-                                    </div>
-                                    <div class="">
-                                        <small class="text-muted">フォロー中：{{ account.follow }}</small>
-                                    </div>
-                                </div>
+                                <img src="{{ account.img }}" alt="" style="height: 50px; border-radius: 30px"
+                                     class="mx-2">
+                                <div class="ml-2 d-flex align-items-center">{{ account.name }}</div>
                             </div>
                         </div>
 
@@ -38,14 +26,26 @@
                                    class="btn btn-outline-secondary offset-2 col-3"
                                    role="button">削除</a>
                             </div>
-                            <div class="row mt-2 pr-3" style="justify-content: flex-end;">
-                                <small class="text-muted">追加日：{{ account.created_at }}</small>
-                            </div>
-                            {% ifequal account.id scoring.id %}
-                                <div class="row mt-2 pr-3" style="justify-content: flex-end;">
-                                    <small class="text-muted">スコアリング中...</small>
+                            <div class="row">
+                                <div class="col-5 d-flex flex-column text-left">
+                                    <div class="row mt-2 pl-3">
+                                        <small class="text-muted">フォロワー：{{ account.follower }}</small>
+                                    </div>
+                                    <div class="row mt-2 pl-3">
+                                        <small class="text-muted">フォロー中：{{ account.follow }}</small>
+                                    </div>
                                 </div>
-                            {% endifequal %}
+                                <div class="col-7">
+                                    <div class="row mt-2 pr-3" style="justify-content: flex-end;">
+                                        <small class="text-muted">追加日：{{ account.created_at }}</small>
+                                    </div>
+                                    {% ifequal account.id scoring.id %}
+                                        <div class="row mt-2 pr-3" style="justify-content: flex-end;">
+                                            <small class="text-muted">スコアリング中...</small>
+                                        </div>
+                                    {% endifequal %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
