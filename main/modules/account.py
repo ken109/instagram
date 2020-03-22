@@ -38,7 +38,7 @@ class MamSpider(Crawler):
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
         follower = int(self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[2]/a/span').get_attribute('title').replace(',', ''))
-        follow = int(self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a/span').get_attribute('title').replace(',', ''))
+        follow = int(self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a/span').text.replace(',', ''))
         if Account.objects.filter(url=self.driver.current_url).exists():
             if Account.objects.get(url=self.driver.current_url).invisible == 1:
                 return self.driver.current_url, []
