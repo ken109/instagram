@@ -42,7 +42,7 @@ class MamSpider(Crawler):
         if Account.objects.filter(url=self.driver.current_url).exists():
             if Account.objects.get(url=self.driver.current_url).invisible == 1:
                 return self.driver.current_url, []
-        elif follower > 3000:
+        if follower > 3000 or 'official' in name:
             return self.driver.current_url, []
         Account.objects.update_or_create(url=self.driver.current_url, defaults={
             'name': name,
