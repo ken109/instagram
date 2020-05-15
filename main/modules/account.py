@@ -1,8 +1,12 @@
+import re
+
 from django.utils import timezone
+from instagram.settings import TITLE
 
 from main.models import Account, SearchWord
 
 from .crawler import Crawler
+from .notify import ChatWork
 
 
 class MamSpider(Crawler):
@@ -37,13 +41,20 @@ class MamSpider(Crawler):
         name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/*[1]').text
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
-        follower = int(self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[2]/a/span').get_attribute('title').replace(',', ''))
-        follow = int(self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a/span').text.replace(',', ''))
+        follower = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[2]/a/span').get_attribute('title').replace(',', '')
+        follower = int(follower) if re.match('^[0-9]*$', follower) else 0
+        follow = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a/span').text.replace(',', '')
+        follow = int(follow) if re.match('^[0-9]*$', follow) else 0
+
         if Account.objects.filter(url=self.driver.current_url).exists():
+            ChatWork.send_message('{}:exists'.format(TITLE))
             if Account.objects.get(url=self.driver.current_url).invisible == 1:
+                ChatWork.send_message('{}:invisible'.format(TITLE))
                 return self.driver.current_url, []
+
         if follower > 3000 or 'official' in name:
             return self.driver.current_url, []
+        ChatWork.send_message('{}:new'.format(TITLE))
         Account.objects.update_or_create(url=self.driver.current_url, defaults={
             'name': name,
             'img': img,
