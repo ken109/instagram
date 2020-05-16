@@ -14,13 +14,17 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         while True:
-            bot = MamSpider()
             try:
-                bot.start()
+                while True:
+                    bot = MamSpider()
+                    try:
+                        bot.start()
+                    except:
+                        bot.driver.save_screenshot('account_error.png')
+                        ChatWork.send_file('account_error.png', f"{TITLE}\nGET ACCOUNT\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}")
+                        os.remove('account_error.png')
+                        traceback.print_exc()
+                    finally:
+                        bot.quit()
             except:
-                bot.driver.save_screenshot('account_error.png')
-                ChatWork.send_file('account_error.png', f"{TITLE}\nGET ACCOUNT\ntag: {bot.tag}\npost: {bot.url}\n{traceback.format_exc()}")
-                os.remove('account_error.png')
-                traceback.print_exc()
-            finally:
-                bot.quit()
+                pass
