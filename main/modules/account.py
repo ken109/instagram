@@ -47,9 +47,7 @@ class MamSpider(Crawler):
         follow = int(follow) if re.match('^[0-9]*$', follow) else 0
 
         if Account.objects.filter(url=self.driver.current_url).exists():
-            ChatWork.send_message('{}:exists'.format(TITLE))
             if Account.objects.get(url=self.driver.current_url).invisible == 1:
-                ChatWork.send_message('{}:invisible'.format(TITLE))
                 return self.driver.current_url, []
 
         if follower > 3000 or 'official' in name:
