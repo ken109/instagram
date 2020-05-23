@@ -1,3 +1,5 @@
+import chromedriver_binary
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -8,7 +10,7 @@ options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument("--user-data-dir=chrome-data")
-driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=options)
+driver = webdriver.Chrome(chrome_options=options)
 
 driver.get('https://www.instagram.com/')
 ChatWork.send_screen(driver)
