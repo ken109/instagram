@@ -13,7 +13,7 @@ options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--blink-settings=imagesEnabled=false')
 options.add_argument('--no-sandbox')
 options.add_argument("--user-data-dir=chrome-data")
-driver = webdriver.Chrome(chrome_options=options)
+driver = webdriver.Chrome(options=options)
 
 driver.get('https://www.instagram.com/')
 

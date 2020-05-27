@@ -30,7 +30,7 @@ class Crawler:
     BASE_URL = 'https://www.instagram.com/'
 
     def __init__(self):
-        self.driver = webdriver.Chrome(chrome_options=get_chrome_options())
+        self.driver = webdriver.Chrome(options=get_chrome_options())
         self.driver.implicitly_wait(10)
         self.wait = Wait(self.driver)
         self.browser = Browser(self.driver)

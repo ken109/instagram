@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         accounts = Account.objects.filter(invisible=0).order_by('-score').all()[99:]
-        driver = webdriver.Chrome(chrome_options=get_chrome_options(data_dir=False))
+        driver = webdriver.Chrome(options=get_chrome_options(data_dir=False))
 
         for account in accounts:
             driver.get(account.url)
