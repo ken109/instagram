@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 account.save()
             except:
                 pass
-            time.sleep(5)
+            time.sleep(40)
 
         driver.close()
         driver.quit()
