@@ -2,11 +2,11 @@ from django.core.management.base import BaseCommand
 
 import chromedriver_binary
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 import time
 import re
 
 from main.models import Account
+from main.modules.crawler import get_chrome_options
 
 
 class Command(BaseCommand):
@@ -14,12 +14,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         accounts = Account.objects.filter(invisible=0).order_by('-score').all()[99:]
-        chrome_options = Options()
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument("--user-data-dir=chrome-data")
-        driver = webdriver.Chrome(chrome_options=chrome_options)
+        driver = webdriver.Chrome(chrome_options=get_chrome_options())
 
         for account in accounts:
             driver.get(account.url)
