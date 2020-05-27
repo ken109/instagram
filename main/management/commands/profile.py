@@ -13,7 +13,7 @@ class Command(BaseCommand):
     help = 'update profile'
 
     def handle(self, *args, **options):
-        accounts = Account.objects.order_by('-score')[99:]
+        accounts = Account.objects.filter(invisible=0).order_by('-score').all()[99:]
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
