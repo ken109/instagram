@@ -17,7 +17,7 @@ class TagSpider(Crawler):
     def start(self):
         # self.login()
         while True:
-            word = SearchWord.objects.filter(scored_at__isnull=True).order_by('id').first()
+            word = SearchWord.objects.filter(scored_at__isnull=True).order_by('id')[0]
             if word is None:
                 time.sleep(5)
             else:
@@ -26,8 +26,7 @@ class TagSpider(Crawler):
                 for post_from_word in self.posts_from_word(True,
                                                            TagSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
                     self.scoring(word.word, post_from_word)
-                zero_words = SearchWord.objects.filter(score=0, scored_at__isnull=False).all()
-                zero_words.delete()
+                SearchWord.objects.filter(scored_at__isnull=False).order_by('-score')[200:].delete()
 
     def scoring(self, word, post):
         self.url = post

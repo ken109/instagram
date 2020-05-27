@@ -19,19 +19,15 @@ class MamSpider(Crawler):
         # self.login()
         while True:
             words = SearchWord.objects.order_by('-score').all()[:100]
-            if len(words):
-                min_count = sorted(words, key=lambda tag: tag.search_count)[0].search_count
-                for word in words:
-                    if word.search_count == min_count:
-                        word.searched_at = timezone.now()
-                        word.search_count += 1
-                        word.save()
-                        for post_from_word in self.posts_from_word(False,
-                                                                   MamSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
-                            user_url, posts_from_user = self.user_posts_from_word_post(post_from_word)
-                            for post_from_user in posts_from_user:
-                                self.scoring(user_url, post_from_user)
-                        break
+            for word in words:
+                word.searched_at = timezone.now()
+                word.search_count += 1
+                word.save()
+                for post_from_word in self.posts_from_word(False,
+                                                           MamSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
+                    user_url, posts_from_user = self.user_posts_from_word_post(post_from_word)
+                    for post_from_user in posts_from_user:
+                        self.scoring(user_url, post_from_user)
 
     def user_posts_from_word_post(self, post):
         self.url = post
