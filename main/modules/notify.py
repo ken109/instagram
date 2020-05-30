@@ -1,10 +1,10 @@
 import requests
-import smtplib
-import ssl
+# import smtplib
+# import ssl
 import os
-from email.mime.text import MIMEText
+# from email.mime.text import MIMEText
 
-from instagram.settings import MAIL_TO
+# from instagram.settings import MAIL_TO
 
 
 class ChatWork:
@@ -47,15 +47,15 @@ class ChatWork:
         )
 
 
-def mail(subject, body):
-    account = "kubok.dev@gmail.com"
-
-    server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context())
-    server.login(account, 'tjbqzygxxuuylrez')
-
-    for to in MAIL_TO:
-        msg = MIMEText(body, "plain")
-        msg["Subject"] = subject
-        msg["To"] = to
-        msg["From"] = account
-        server.send_message(msg)
+# def mail(subject, body):
+#     account = "kubok.dev@gmail.com"
+#
+#     server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context())
+#     server.login(account, 'tjbqzygxxuuylrez')
+#
+#     for to in MAIL_TO:
+#         msg = MIMEText(body, "plain")
+#         msg["Subject"] = subject
+#         msg["To"] = to
+#         msg["From"] = account
+#         server.send_message(msg)
