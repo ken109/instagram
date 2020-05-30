@@ -16,7 +16,7 @@ class MamSpider(Crawler):
         super().__init__()
 
     def start(self):
-        # self.login()
+        self.login()
         while True:
             words = SearchWord.objects.order_by('-score').all()[:100]
             for word in words:
