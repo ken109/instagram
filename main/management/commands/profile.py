@@ -6,7 +6,6 @@ import re
 
 from main.models import Account
 from main.modules.crawler import Crawler
-from main.modules.notify import ChatWork
 
 
 class Command(BaseCommand):
@@ -20,7 +19,6 @@ class Command(BaseCommand):
         for account in accounts:
             crawler.driver.get(account.url)
             try:
-                ChatWork.send_screen(crawler.driver)
                 account.img = crawler.driver.find_element_by_xpath(
                     '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
                 follower = crawler.driver.find_element_by_xpath(

@@ -7,7 +7,6 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 
 from main.models import ScoreWord
-from main.modules.notify import ChatWork
 
 from .wait import Wait
 from .browser import Browser
@@ -42,16 +41,13 @@ class Crawler:
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[2]/div/label/input',
             wait_time=10).send_keys(
             'kubok.dev+instagram@gmail.com')
-        ChatWork.send_screen(self.driver)
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[3]/div/label/input',
             wait_time=10).send_keys(
             'Kubo109Ken')
-        ChatWork.send_screen(self.driver)
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button', wait_time=10).click()
         time.sleep(10)
-        ChatWork.send_screen(self.driver)
         # self.wait.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
 
     def posts_from_word(self, is_tag, word):
