@@ -50,8 +50,8 @@ class Crawler:
         ChatWork.send_screen(self.driver)
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/article/div[2]/div[1]/div/form/div[4]/button', wait_time=10).click()
-        ChatWork.send_screen(self.driver)
         time.sleep(10)
+        ChatWork.send_screen(self.driver)
         # self.wait.find_element_by_xpath('/html/body/div[4]/div/div/div[3]/button[2]').click()
 
     def posts_from_word(self, is_tag, word):
