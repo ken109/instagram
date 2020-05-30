@@ -28,6 +28,7 @@ class MamSpider(Crawler):
                     user_url, posts_from_user = self.user_posts_from_word_post(post_from_word)
                     for post_from_user in posts_from_user:
                         self.scoring(user_url, post_from_user)
+                    Account.objects.filter(scored_at__isnull=False).order_by('-score')[297:].delete()
 
     def user_posts_from_word_post(self, post):
         self.url = post
