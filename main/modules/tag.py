@@ -26,7 +26,7 @@ class TagSpider(Crawler):
                 for post_from_word in self.posts_from_word(True,
                                                            TagSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
                     self.scoring(word.word, post_from_word)
-                SearchWord.objects.filter(scored_at__isnull=False).order_by('-score')[300:].delete()
+                    SearchWord.objects.filter(scored_at__isnull=False).order_by('-score')[300:].delete()
 
     def scoring(self, word, post):
         self.url = post
