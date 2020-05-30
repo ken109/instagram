@@ -28,7 +28,8 @@ class MamSpider(Crawler):
                     user_url, posts_from_user = self.user_posts_from_word_post(post_from_word)
                     for post_from_user in posts_from_user:
                         self.scoring(user_url, post_from_user)
-                        Account.objects.filter(scored_at__isnull=False).order_by('-score')[297:].delete()
+                        for account in Account.objects.filter(scored_at__isnull=False, invisible=False).order_by('-score')[297:]:
+                            account.delete()
 
     def user_posts_from_word_post(self, post):
         self.url = post
@@ -38,9 +39,12 @@ class MamSpider(Crawler):
         name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/*[1]').text
         img = self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/header/div/div/span/img').get_attribute('src')
-        follower = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[2]/a/span').get_attribute('title').replace(',', '')
+        follower = self.wait.find_element_by_xpath(
+            '//*[@id="react-root"]/section/main/div/header/section/ul/li[2]/a/span').get_attribute('title').replace(',',
+                                                                                                                    '')
         follower = int(follower) if re.match('^[0-9]*$', follower) else 0
-        follow = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a/span').text.replace(',', '')
+        follow = self.wait.find_element_by_xpath(
+            '//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a/span').text.replace(',', '')
         follow = int(follow) if re.match('^[0-9]*$', follow) else 0
 
         if Account.objects.filter(url=self.driver.current_url).exists():

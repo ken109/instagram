@@ -26,7 +26,8 @@ class TagSpider(Crawler):
                 for post_from_word in self.posts_from_word(True,
                                                            TagSpider.BASE_URL + 'explore/tags/' + word.word + '/'):
                     self.scoring(word.word, post_from_word)
-                    SearchWord.objects.filter(scored_at__isnull=False).order_by('-score')[300:].delete()
+                    for tag in SearchWord.objects.filter(scored_at__isnull=False).order_by('-score')[300:]:
+                        tag.delete()
 
     def scoring(self, word, post):
         self.url = post
@@ -35,7 +36,7 @@ class TagSpider(Crawler):
             text = self.wait.find_element_by_xpath(
                 '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/*[2]').text
             tags = re.compile(r'#(\w+)').findall(text)
-            for tag in tags:
+            for tag in tags[:2]:
                 if re.match(r'^[^a-zA-Z]*$', tag):
                     SearchWord.objects.update_or_create(word=tag)
             score = self.score(text)
