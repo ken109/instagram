@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 
 import traceback
 import os
+import time
 
 from instagram.settings import TITLE
 
@@ -26,5 +27,6 @@ class Command(BaseCommand):
                         traceback.print_exc()
                     finally:
                         bot.quit()
+                        time.sleep(600)
             except:
                 pass
