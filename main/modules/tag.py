@@ -15,7 +15,7 @@ class TagSpider(Crawler):
         super().__init__()
 
     def start(self):
-        self.login()
+        # self.login()
         while True:
             word = SearchWord.objects.filter(scored_at__isnull=True).order_by('id').first()
             if word is None:
