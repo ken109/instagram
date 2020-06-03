@@ -32,6 +32,9 @@ class TagSpider(Crawler):
     def scoring(self, word, post):
         self.url = post
         self.driver.get(post)
+        time.sleep(5)
+        self.driver.get(post)
+        time.sleep(5)
         try:
             text = self.wait.find_element_by_xpath(
                 '//*[@id="react-root"]/section/main/div/div/article/div[2]/div[1]/ul/div/li/div/div/div[2]/*[2]').text

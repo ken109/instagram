@@ -4,6 +4,7 @@ from django.utils import timezone
 from instagram.settings import TITLE
 
 from main.models import Account, SearchWord
+import time
 
 from .crawler import Crawler
 from .notify import ChatWork
@@ -34,6 +35,9 @@ class MamSpider(Crawler):
     def user_posts_from_word_post(self, post):
         self.url = post
         self.driver.get(post)
+        time.sleep(5)
+        self.driver.get(post)
+        time.sleep(5)
         self.wait.find_element_by_xpath(
             '//*[@id="react-root"]/section/main/div/div/article/header/div[2]/div[1]/div[1]/a').click()
         name = self.wait.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/div[1]/*[1]').text

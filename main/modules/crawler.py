@@ -54,6 +54,8 @@ class Crawler:
         self.tag = word
         self.driver.get(word)
         time.sleep(5)
+        self.driver.get(word)
+        time.sleep(5)
         posts = []
         for row in range(3):
             for col in range(3):
